@@ -4,7 +4,21 @@
 \alias{ari_fixed_agerel}
 \title{Bayesian linear regression with Stan}
 \usage{
-ari_fixed_agerel(N, K, b, ObsT, AgeTops, R, ...)
+ari_fixed_agerel(
+  N,
+  K,
+  b,
+  ObsT,
+  AgeTops,
+  R,
+  ari_mu = 0.01,
+  ari_sig = 0.001,
+  rho_mu = 0.01,
+  rho_sig = 0.001,
+  alpha_mu = -0.01,
+  alpha_sig = 0.005,
+  ...
+)
 }
 \arguments{
 \item{N}{denominator matrix NT_obs x NAge_obs}
@@ -18,6 +32,18 @@ ari_fixed_agerel(N, K, b, ObsT, AgeTops, R, ...)
 \item{AgeTops}{locations of age tops}
 
 \item{R}{relative foi by age (length A=number of underlying ages)}
+
+\item{ari_mu}{ARI prior log normal mu}
+
+\item{ari_sig}{ARI prior log normal sigma}
+
+\item{rho_mu}{Reversion prior log normal mu}
+
+\item{rho_sig}{Reversion prior log normal sigma}
+
+\item{alpha_mu}{ARI trend prior normal mu}
+
+\item{alpha_sig}{ARI trend prior normal sigma}
 
 \item{...}{Arguments passed to \code{rstan::sampling} (e.g. iter, chains).}
 }

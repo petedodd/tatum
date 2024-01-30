@@ -27,54 +27,63 @@ namespace model_ariest_namespace {
 using stan::model::model_base_crtp;
 using namespace stan::math;
 stan::math::profile_map profiles__;
-static constexpr std::array<const char*, 47> locations_array__ =
+static constexpr std::array<const char*, 56> locations_array__ =
   {" (found before start of program)",
-  " (in 'ariest', line 14, column 2 to column 24)",
-  " (in 'ariest', line 15, column 2 to column 20)",
-  " (in 'ariest', line 16, column 2 to column 37)",
-  " (in 'ariest', line 19, column 2 to column 35)",
-  " (in 'ariest', line 20, column 2 to column 60)",
-  " (in 'ariest', line 23, column 4 to line 24, column 29)",
-  " (in 'ariest', line 22, column 16 to line 25, column 3)",
-  " (in 'ariest', line 22, column 2 to line 25, column 3)",
-  " (in 'ariest', line 27, column 4 to line 29, column 44)",
-  " (in 'ariest', line 31, column 6 to line 33, column 46)",
-  " (in 'ariest', line 30, column 17 to line 34, column 5)",
-  " (in 'ariest', line 30, column 4 to line 34, column 5)",
-  " (in 'ariest', line 26, column 15 to line 35, column 3)",
-  " (in 'ariest', line 26, column 2 to line 35, column 3)",
-  " (in 'ariest', line 43, column 8 to column 59)",
-  " (in 'ariest', line 42, column 13 to line 44, column 7)",
-  " (in 'ariest', line 41, column 8 to column 48)",
-  " (in 'ariest', line 40, column 14 to line 42, column 7)",
-  " (in 'ariest', line 40, column 6 to line 44, column 7)",
-  " (in 'ariest', line 39, column 24 to line 45, column 5)",
-  " (in 'ariest', line 39, column 4 to line 45, column 5)",
-  " (in 'ariest', line 38, column 20 to line 47, column 3)",
-  " (in 'ariest', line 38, column 2 to line 47, column 3)",
-  " (in 'ariest', line 50, column 2 to column 63)",
-  " (in 'ariest', line 2, column 2 to column 8)",
+  " (in 'ariest', line 19, column 2 to column 24)",
+  " (in 'ariest', line 20, column 2 to column 20)",
+  " (in 'ariest', line 21, column 2 to column 37)",
+  " (in 'ariest', line 24, column 2 to column 35)",
+  " (in 'ariest', line 25, column 2 to column 60)",
+  " (in 'ariest', line 28, column 4 to line 29, column 29)",
+  " (in 'ariest', line 27, column 16 to line 30, column 3)",
+  " (in 'ariest', line 27, column 2 to line 30, column 3)",
+  " (in 'ariest', line 32, column 4 to line 34, column 44)",
+  " (in 'ariest', line 36, column 6 to line 38, column 46)",
+  " (in 'ariest', line 35, column 17 to line 39, column 5)",
+  " (in 'ariest', line 35, column 4 to line 39, column 5)",
+  " (in 'ariest', line 31, column 15 to line 40, column 3)",
+  " (in 'ariest', line 31, column 2 to line 40, column 3)",
+  " (in 'ariest', line 48, column 8 to column 59)",
+  " (in 'ariest', line 47, column 13 to line 49, column 7)",
+  " (in 'ariest', line 46, column 8 to column 48)",
+  " (in 'ariest', line 45, column 14 to line 47, column 7)",
+  " (in 'ariest', line 45, column 6 to line 49, column 7)",
+  " (in 'ariest', line 44, column 24 to line 50, column 5)",
+  " (in 'ariest', line 44, column 4 to line 50, column 5)",
+  " (in 'ariest', line 43, column 20 to line 52, column 3)",
+  " (in 'ariest', line 43, column 2 to line 52, column 3)",
+  " (in 'ariest', line 56, column 2 to column 38)",
+  " (in 'ariest', line 57, column 2 to column 34)",
+  " (in 'ariest', line 58, column 2 to column 37)",
+  " (in 'ariest', line 60, column 2 to column 63)",
   " (in 'ariest', line 3, column 2 to column 8)",
-  " (in 'ariest', line 4, column 9 to column 10)",
-  " (in 'ariest', line 4, column 2 to column 12)",
-  " (in 'ariest', line 5, column 2 to column 13)",
-  " (in 'ariest', line 6, column 11 to column 17)",
-  " (in 'ariest', line 6, column 2 to column 19)",
-  " (in 'ariest', line 7, column 2 to column 15)",
-  " (in 'ariest', line 8, column 14 to column 22)",
-  " (in 'ariest', line 8, column 2 to column 24)",
-  " (in 'ariest', line 9, column 8 to column 14)",
-  " (in 'ariest', line 9, column 15 to column 23)",
-  " (in 'ariest', line 9, column 2 to column 25)",
+  " (in 'ariest', line 4, column 2 to column 8)",
+  " (in 'ariest', line 5, column 9 to column 10)",
+  " (in 'ariest', line 5, column 2 to column 12)",
+  " (in 'ariest', line 6, column 2 to column 13)",
+  " (in 'ariest', line 7, column 11 to column 17)",
+  " (in 'ariest', line 7, column 2 to column 19)",
+  " (in 'ariest', line 8, column 2 to column 15)",
+  " (in 'ariest', line 9, column 14 to column 22)",
+  " (in 'ariest', line 9, column 2 to column 24)",
   " (in 'ariest', line 10, column 8 to column 14)",
   " (in 'ariest', line 10, column 15 to column 23)",
   " (in 'ariest', line 10, column 2 to column 25)",
-  " (in 'ariest', line 11, column 9 to column 10)",
-  " (in 'ariest', line 11, column 2 to column 12)",
-  " (in 'ariest', line 19, column 9 to column 10)",
-  " (in 'ariest', line 19, column 11 to column 12)",
-  " (in 'ariest', line 20, column 10 to column 16)",
-  " (in 'ariest', line 20, column 17 to column 25)"};
+  " (in 'ariest', line 11, column 8 to column 14)",
+  " (in 'ariest', line 11, column 15 to column 23)",
+  " (in 'ariest', line 11, column 2 to column 25)",
+  " (in 'ariest', line 12, column 9 to column 10)",
+  " (in 'ariest', line 12, column 2 to column 12)",
+  " (in 'ariest', line 14, column 2 to column 23)",
+  " (in 'ariest', line 14, column 24 to column 46)",
+  " (in 'ariest', line 15, column 2 to column 23)",
+  " (in 'ariest', line 15, column 24 to column 46)",
+  " (in 'ariest', line 16, column 2 to column 16)",
+  " (in 'ariest', line 16, column 17 to column 41)",
+  " (in 'ariest', line 24, column 9 to column 10)",
+  " (in 'ariest', line 24, column 11 to column 12)",
+  " (in 'ariest', line 25, column 10 to column 16)",
+  " (in 'ariest', line 25, column 17 to column 25)"};
 #include <stan_meta_header.hpp>
 class model_ariest final : public model_base_crtp<model_ariest> {
 private:
@@ -88,6 +97,12 @@ private:
   std::vector<std::vector<int>> N;
   std::vector<std::vector<int>> K;
   std::vector<double> R;
+  double ari_mu;
+  double ari_sig;
+  double rho_mu;
+  double rho_sig;
+  double alpha_mu;
+  double alpha_sig;
 public:
   ~model_ariest() {}
   model_ariest(stan::io::var_context& context__, unsigned int
@@ -109,59 +124,59 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      current_statement__ = 25;
+      current_statement__ = 28;
       context__.validate_dims("data initialization", "T", "int",
         std::vector<size_t>{});
       T = std::numeric_limits<int>::min();
-      current_statement__ = 25;
+      current_statement__ = 28;
       T = context__.vals_i("T")[(1 - 1)];
-      current_statement__ = 26;
+      current_statement__ = 29;
       context__.validate_dims("data initialization", "A", "int",
         std::vector<size_t>{});
       A = std::numeric_limits<int>::min();
-      current_statement__ = 26;
+      current_statement__ = 29;
       A = context__.vals_i("A")[(1 - 1)];
-      current_statement__ = 27;
+      current_statement__ = 30;
       stan::math::validate_non_negative_index("b", "T", T);
-      current_statement__ = 28;
+      current_statement__ = 31;
       context__.validate_dims("data initialization", "b", "double",
         std::vector<size_t>{static_cast<size_t>(T)});
       b = std::vector<double>(T, std::numeric_limits<double>::quiet_NaN());
-      current_statement__ = 28;
+      current_statement__ = 31;
       b = context__.vals_r("b");
-      current_statement__ = 29;
+      current_statement__ = 32;
       context__.validate_dims("data initialization", "NT_obs", "int",
         std::vector<size_t>{});
       NT_obs = std::numeric_limits<int>::min();
-      current_statement__ = 29;
+      current_statement__ = 32;
       NT_obs = context__.vals_i("NT_obs")[(1 - 1)];
-      current_statement__ = 30;
+      current_statement__ = 33;
       stan::math::validate_non_negative_index("ObsT", "NT_obs", NT_obs);
-      current_statement__ = 31;
+      current_statement__ = 34;
       context__.validate_dims("data initialization", "ObsT", "int",
         std::vector<size_t>{static_cast<size_t>(NT_obs)});
       ObsT = std::vector<int>(NT_obs, std::numeric_limits<int>::min());
-      current_statement__ = 31;
+      current_statement__ = 34;
       ObsT = context__.vals_i("ObsT");
-      current_statement__ = 32;
+      current_statement__ = 35;
       context__.validate_dims("data initialization", "NAge_obs", "int",
         std::vector<size_t>{});
       NAge_obs = std::numeric_limits<int>::min();
-      current_statement__ = 32;
+      current_statement__ = 35;
       NAge_obs = context__.vals_i("NAge_obs")[(1 - 1)];
-      current_statement__ = 33;
+      current_statement__ = 36;
       stan::math::validate_non_negative_index("AgeTops", "NAge_obs", NAge_obs);
-      current_statement__ = 34;
+      current_statement__ = 37;
       context__.validate_dims("data initialization", "AgeTops", "int",
         std::vector<size_t>{static_cast<size_t>(NAge_obs)});
       AgeTops = std::vector<int>(NAge_obs, std::numeric_limits<int>::min());
-      current_statement__ = 34;
-      AgeTops = context__.vals_i("AgeTops");
-      current_statement__ = 35;
-      stan::math::validate_non_negative_index("N", "NT_obs", NT_obs);
-      current_statement__ = 36;
-      stan::math::validate_non_negative_index("N", "NAge_obs", NAge_obs);
       current_statement__ = 37;
+      AgeTops = context__.vals_i("AgeTops");
+      current_statement__ = 38;
+      stan::math::validate_non_negative_index("N", "NT_obs", NT_obs);
+      current_statement__ = 39;
+      stan::math::validate_non_negative_index("N", "NAge_obs", NAge_obs);
+      current_statement__ = 40;
       context__.validate_dims("data initialization", "N", "int",
         std::vector<size_t>{static_cast<size_t>(NT_obs),
           static_cast<size_t>(NAge_obs)});
@@ -169,37 +184,8 @@ public:
             std::vector<int>(NAge_obs, std::numeric_limits<int>::min()));
       {
         std::vector<int> N_flat__;
-        current_statement__ = 37;
-        N_flat__ = context__.vals_i("N");
-        current_statement__ = 37;
-        pos__ = 1;
-        current_statement__ = 37;
-        for (int sym1__ = 1; sym1__ <= NAge_obs; ++sym1__) {
-          current_statement__ = 37;
-          for (int sym2__ = 1; sym2__ <= NT_obs; ++sym2__) {
-            current_statement__ = 37;
-            stan::model::assign(N, N_flat__[(pos__ - 1)],
-              "assigning variable N", stan::model::index_uni(sym2__),
-              stan::model::index_uni(sym1__));
-            current_statement__ = 37;
-            pos__ = (pos__ + 1);
-          }
-        }
-      }
-      current_statement__ = 38;
-      stan::math::validate_non_negative_index("K", "NT_obs", NT_obs);
-      current_statement__ = 39;
-      stan::math::validate_non_negative_index("K", "NAge_obs", NAge_obs);
-      current_statement__ = 40;
-      context__.validate_dims("data initialization", "K", "int",
-        std::vector<size_t>{static_cast<size_t>(NT_obs),
-          static_cast<size_t>(NAge_obs)});
-      K = std::vector<std::vector<int>>(NT_obs,
-            std::vector<int>(NAge_obs, std::numeric_limits<int>::min()));
-      {
-        std::vector<int> K_flat__;
         current_statement__ = 40;
-        K_flat__ = context__.vals_i("K");
+        N_flat__ = context__.vals_i("N");
         current_statement__ = 40;
         pos__ = 1;
         current_statement__ = 40;
@@ -207,8 +193,8 @@ public:
           current_statement__ = 40;
           for (int sym2__ = 1; sym2__ <= NT_obs; ++sym2__) {
             current_statement__ = 40;
-            stan::model::assign(K, K_flat__[(pos__ - 1)],
-              "assigning variable K", stan::model::index_uni(sym2__),
+            stan::model::assign(N, N_flat__[(pos__ - 1)],
+              "assigning variable N", stan::model::index_uni(sym2__),
               stan::model::index_uni(sym1__));
             current_statement__ = 40;
             pos__ = (pos__ + 1);
@@ -216,20 +202,96 @@ public:
         }
       }
       current_statement__ = 41;
-      stan::math::validate_non_negative_index("R", "A", A);
+      stan::math::validate_non_negative_index("K", "NT_obs", NT_obs);
       current_statement__ = 42;
+      stan::math::validate_non_negative_index("K", "NAge_obs", NAge_obs);
+      current_statement__ = 43;
+      context__.validate_dims("data initialization", "K", "int",
+        std::vector<size_t>{static_cast<size_t>(NT_obs),
+          static_cast<size_t>(NAge_obs)});
+      K = std::vector<std::vector<int>>(NT_obs,
+            std::vector<int>(NAge_obs, std::numeric_limits<int>::min()));
+      {
+        std::vector<int> K_flat__;
+        current_statement__ = 43;
+        K_flat__ = context__.vals_i("K");
+        current_statement__ = 43;
+        pos__ = 1;
+        current_statement__ = 43;
+        for (int sym1__ = 1; sym1__ <= NAge_obs; ++sym1__) {
+          current_statement__ = 43;
+          for (int sym2__ = 1; sym2__ <= NT_obs; ++sym2__) {
+            current_statement__ = 43;
+            stan::model::assign(K, K_flat__[(pos__ - 1)],
+              "assigning variable K", stan::model::index_uni(sym2__),
+              stan::model::index_uni(sym1__));
+            current_statement__ = 43;
+            pos__ = (pos__ + 1);
+          }
+        }
+      }
+      current_statement__ = 44;
+      stan::math::validate_non_negative_index("R", "A", A);
+      current_statement__ = 45;
       context__.validate_dims("data initialization", "R", "double",
         std::vector<size_t>{static_cast<size_t>(A)});
       R = std::vector<double>(A, std::numeric_limits<double>::quiet_NaN());
-      current_statement__ = 42;
-      R = context__.vals_r("R");
-      current_statement__ = 43;
-      stan::math::validate_non_negative_index("f", "T", T);
-      current_statement__ = 44;
-      stan::math::validate_non_negative_index("f", "A", A);
       current_statement__ = 45;
-      stan::math::validate_non_negative_index("fs", "NT_obs", NT_obs);
+      R = context__.vals_r("R");
       current_statement__ = 46;
+      context__.validate_dims("data initialization", "ari_mu", "double",
+        std::vector<size_t>{});
+      ari_mu = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 46;
+      ari_mu = context__.vals_r("ari_mu")[(1 - 1)];
+      current_statement__ = 46;
+      stan::math::check_greater_or_equal(function__, "ari_mu", ari_mu, 0);
+      current_statement__ = 47;
+      context__.validate_dims("data initialization", "ari_sig", "double",
+        std::vector<size_t>{});
+      ari_sig = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 47;
+      ari_sig = context__.vals_r("ari_sig")[(1 - 1)];
+      current_statement__ = 47;
+      stan::math::check_greater_or_equal(function__, "ari_sig", ari_sig, 0);
+      current_statement__ = 48;
+      context__.validate_dims("data initialization", "rho_mu", "double",
+        std::vector<size_t>{});
+      rho_mu = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 48;
+      rho_mu = context__.vals_r("rho_mu")[(1 - 1)];
+      current_statement__ = 48;
+      stan::math::check_greater_or_equal(function__, "rho_mu", rho_mu, 0);
+      current_statement__ = 49;
+      context__.validate_dims("data initialization", "rho_sig", "double",
+        std::vector<size_t>{});
+      rho_sig = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 49;
+      rho_sig = context__.vals_r("rho_sig")[(1 - 1)];
+      current_statement__ = 49;
+      stan::math::check_greater_or_equal(function__, "rho_sig", rho_sig, 0);
+      current_statement__ = 50;
+      context__.validate_dims("data initialization", "alpha_mu", "double",
+        std::vector<size_t>{});
+      alpha_mu = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 50;
+      alpha_mu = context__.vals_r("alpha_mu")[(1 - 1)];
+      current_statement__ = 51;
+      context__.validate_dims("data initialization", "alpha_sig", "double",
+        std::vector<size_t>{});
+      alpha_sig = std::numeric_limits<double>::quiet_NaN();
+      current_statement__ = 51;
+      alpha_sig = context__.vals_r("alpha_sig")[(1 - 1)];
+      current_statement__ = 51;
+      stan::math::check_greater_or_equal(function__, "alpha_sig", alpha_sig,
+        0);
+      current_statement__ = 52;
+      stan::math::validate_non_negative_index("f", "T", T);
+      current_statement__ = 53;
+      stan::math::validate_non_negative_index("f", "A", A);
+      current_statement__ = 54;
+      stan::math::validate_non_negative_index("fs", "NT_obs", NT_obs);
+      current_statement__ = 55;
       stan::math::validate_non_negative_index("fs", "NAge_obs", NAge_obs);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -360,6 +422,15 @@ public:
       }
       {
         current_statement__ = 24;
+        lp_accum__.add(stan::math::lognormal_lpdf<propto__>(lambda0, ari_mu,
+                         ari_sig));
+        current_statement__ = 25;
+        lp_accum__.add(stan::math::lognormal_lpdf<propto__>(rho, rho_mu,
+                         rho_sig));
+        current_statement__ = 26;
+        lp_accum__.add(stan::math::normal_lpdf<propto__>(alpha, alpha_mu,
+                         alpha_sig));
+        current_statement__ = 27;
         lp_accum__.add(stan::math::binomial_lpmf<propto__>(
                          stan::math::to_array_1d(K),
                          stan::math::to_array_1d(N),

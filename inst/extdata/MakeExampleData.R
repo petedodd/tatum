@@ -14,6 +14,19 @@ alpha <- 0.01
 rho <- 0.05
 R <- rep(1,A)
 
+## start the object (N & K added below)
+test_data <- list(ObsT = c(5,10,15,20), #times of observations
+                  AgeTops=AgeTops,       #locations of age tops
+                  ## N=N,#denominator matrix NT_obs x NAge_obs
+                  ## K=K,#numerator matrix NT_obs x NAge_obs
+                  b=b,  #per capita birth rate (length T)
+                  R=R, #relative foi by age (length A)
+                  ari_mu=1e-2, ari_sig=1e-3, #prior for ARI TODO update
+                  rho_mu=1e-2,rho_sig=1e-3,  #prior for regression TODO look up
+                  alpha_mu=-1e-2,alpha_sig=5e-3 #prior for trend TODO update
+                  )
+
+
 ## means
 f <- matrix(nrow=T,ncol=A)
 for(i in 1:A)
@@ -47,22 +60,3 @@ for(i in 1:NT_obs){
 ## add to stan data
 test_data$N <- N
 test_data$K <- K
-
-## make data
-test_data <- list(N=N,#denominator matrix NT_obs x NAge_obs
-                  K=K,#numerator matrix NT_obs x NAge_obs
-                  b=b,  #per capita birth rate (length T)
-                  ObsT = c(5,10,15,20), #times of observations
-                  AgeTops=AgeTops,#locations of age tops
-                  R=R #relative foi by age (length A)
-                  )
-
-## test_data <- list(T = T, #number of times
-##                   A = A,   #number of ages = 81
-##                   b = b,  #per capita birth rate
-##                   NT_obs = NT_obs, #number of time observations
-##                   ObsT = c(5,10,15,20), #times of observations
-##                   NAge_obs = NAge_obs, # number of age cats
-##                   AgeTops = seq(from=5,by=5,len=NAge_obs),#locations of age tops
-##                   R = rep(1,A)#relative foi by age
-##                   )

@@ -8,6 +8,12 @@
 #' @param ObsT times of observations (length NAge_obs)
 #' @param AgeTops locations of age tops
 #' @param R relative foi by age (length A=number of underlying ages)
+#' @param ari_mu ARI prior log normal mu
+#' @param ari_sig ARI prior log normal sigma
+#' @param rho_mu Reversion prior log normal mu
+#' @param rho_sig Reversion prior log normal sigma
+#' @param alpha_mu ARI trend prior normal mu
+#' @param alpha_sig ARI trend prior normal sigma
 #' @param ... Arguments passed to `rstan::sampling` (e.g. iter, chains).
 #' @return An object of class `stanfit` returned by `rstan::sampling`
 #' @examples
@@ -36,6 +42,9 @@ ari_fixed_agerel <- function(N,#denominator matrix NT_obs x NAge_obs
                              ## NAge_obs, # number of age cats [get from K]
                              AgeTops,#locations of age tops [length NAge_obs]
                              R, #relative foi by age (length A)
+                             ari_mu=1e-2, ari_sig=1e-3, #prior for ARI TODO update
+                             rho_mu=1e-2,rho_sig=1e-3,  #prior for regression TODO look up
+                             alpha_mu=-1e-2,alpha_sig=5e-3, #prior for trend TODO update
                              ...) {
   T <- length(b) #number of times [get from b]
   A <- length(R) #number of ages = 81 [get from R]
@@ -56,7 +65,10 @@ ari_fixed_agerel <- function(N,#denominator matrix NT_obs x NAge_obs
              ObsT= ObsT, #times of observations
              NAge_obs = NAge_obs, # number of age cats
              AgeTops = AgeTops,#locations of age tops
-             R = R#relative foi by age
+             R = R, #relative foi by age
+             ari_mu=ari_mu, ari_sig=ari_sig, #prior for ARI
+             rho_mu=rho_mu,rho_sig=rho_sig,  #prior for regression
+             alpha_mu=alpha_mu,alpha_sig=alpha_sig #prior for trend
              )
   out <- rstan::sampling(stanmodels$ariest, data = SD, ...)
   return(out)

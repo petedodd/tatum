@@ -1,4 +1,5 @@
 data{
+  /* data inputs */
   int T;// number of times
   int A;//number of ages = 81
   real b[T];//per capita birth rate
@@ -9,6 +10,10 @@ data{
   int N[NT_obs,NAge_obs];//observation denominators
   int K[NT_obs,NAge_obs];//observation numerators
   real R[A];//relative foi by age
+  /* inputs for priors */
+  real<lower=0> ari_mu; real<lower=0> ari_sig;
+  real<lower=0> rho_mu; real<lower=0> rho_sig;
+  real alpha_mu; real<lower=0> alpha_sig;
 }
 parameters{
   real<lower=0> lambda0;//initial foi
@@ -47,6 +52,11 @@ transformed parameters{
   }
 }
 model{
+  /* priors */
+  lambda0 ~ lognormal(ari_mu,ari_sig);
+  rho ~ lognormal(rho_mu,rho_sig);
+  alpha ~ normal(alpha_mu,alpha_sig);
+  /* likelihood */
   to_array_1d(K) ~ binomial( to_array_1d(N), to_array_1d(fs) );
   //NOTE f is uninfected -> so is K
 }
