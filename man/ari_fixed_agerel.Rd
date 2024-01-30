@@ -7,16 +7,16 @@
 ari_fixed_agerel(
   N,
   K,
-  b,
+  T,
   ObsT,
   AgeTops,
   R,
-  ari_mu = 0.01,
-  ari_sig = 0.001,
-  rho_mu = 0.01,
-  rho_sig = 0.001,
-  alpha_mu = -0.01,
-  alpha_sig = 0.005,
+  ari_mu = -4,
+  ari_sig = 0.7,
+  rho_mu = -3,
+  rho_sig = 0.2,
+  alpha_mu = 0,
+  alpha_sig = 0.05,
   ...
 )
 }
@@ -24,8 +24,6 @@ ari_fixed_agerel(
 \item{N}{denominator matrix NT_obs x NAge_obs}
 
 \item{K}{numerator matrix NT_obs x NAge_obs}
-
-\item{b}{per capita birth rate (length T=number of times)}
 
 \item{ObsT}{times of observations (length NAge_obs)}
 
@@ -46,6 +44,8 @@ ari_fixed_agerel(
 \item{alpha_sig}{ARI trend prior normal sigma}
 
 \item{...}{Arguments passed to \code{rstan::sampling} (e.g. iter, chains).}
+
+\item{b}{per capita birth rate (length T=number of times)}
 }
 \value{
 An object of class \code{stanfit} returned by \code{rstan::sampling}
@@ -58,7 +58,7 @@ Bayesian linear regression with Stan
 # run inference on test_data using 4 chains in parallel
 out <- ari_fixed_agerel(N=test_data$N,#denominator matrix NT_obs x NAge_obs
 K=test_data$K,#numerator matrix NT_obs x NAge_obs
-b=test_data$b,  #per capita birth rate (length T)
+T=test_data$T, #number of times
 ObsT=test_data$ObsT, #times of observations
 AgeTops=test_data$AgeTops,#locations of age tops
 R=test_data$R,            #relative ARI by age

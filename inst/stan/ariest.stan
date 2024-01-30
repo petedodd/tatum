@@ -2,7 +2,6 @@ data{
   /* data inputs */
   int T;// number of times
   int A;//number of ages = 81
-  real b[T];//per capita birth rate
   int NT_obs;//number of time observations
   int ObsT[NT_obs];//times of observations
   int NAge_obs;//number of age cats
@@ -11,8 +10,8 @@ data{
   int K[NT_obs,NAge_obs];//observation numerators
   real R[A];//relative foi by age
   /* inputs for priors */
-  real<lower=0> ari_mu; real<lower=0> ari_sig;
-  real<lower=0> rho_mu; real<lower=0> rho_sig;
+  real ari_mu; real<lower=0> ari_sig;
+  real rho_mu; real<lower=0> rho_sig;
   real alpha_mu; real<lower=0> alpha_sig;
 }
 parameters{
@@ -29,7 +28,7 @@ transformed parameters{
       (R[i] * lambda0 + rho); //initial state
   }
   for(i in 2:T){
-    f[i,1] = b[i] * exp(-lambda0*exp( -alpha*(i-1) )) +
+    f[i,1] = exp(-lambda0*exp( -alpha*(i-1) )) +
       (rho / (R[1] * lambda0*exp( -alpha*(i-1) )+rho)) *
       (1-exp(-lambda0*exp( -alpha*(i-1) )));
     for(j in 2:A){

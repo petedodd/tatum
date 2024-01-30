@@ -5,7 +5,6 @@ T <- 20
 A <- 81
 NT_obs <- 4
 NAge_obs <- 16
-b <- rep(0.02,T)
 AgeTops <- seq(from=5,by=5,len=NAge_obs)
 
 ## true parms
@@ -14,16 +13,16 @@ alpha <- 0.01
 rho <- 0.05
 R <- rep(1,A)
 
-## start the object (N & K added below)
+## start the object (N & K & T added below)
 test_data <- list(ObsT = c(5,10,15,20), #times of observations
                   AgeTops=AgeTops,       #locations of age tops
                   ## N=N,#denominator matrix NT_obs x NAge_obs
                   ## K=K,#numerator matrix NT_obs x NAge_obs
-                  b=b,  #per capita birth rate (length T)
+                  ## T=T,#number of times 
                   R=R, #relative foi by age (length A)
-                  ari_mu=1e-2, ari_sig=1e-3, #prior for ARI TODO update
-                  rho_mu=1e-2,rho_sig=1e-3,  #prior for regression TODO look up
-                  alpha_mu=-1e-2,alpha_sig=5e-3 #prior for trend TODO update
+                  ari_mu=-4, ari_sig=0.7, #prior for ARI TODO update
+                  rho_mu=-3,rho_sig=0.2,  #prior for regression TODO look up
+                  alpha_mu=0,alpha_sig=5e-2 #prior for trend TODO update
                   )
 
 
@@ -32,7 +31,7 @@ f <- matrix(nrow=T,ncol=A)
 for(i in 1:A)
   f[1,i] = (1-exp(-(R[i] * lambda0 + rho) * (i-0.5))) * rho / (R[i] * lambda0 + rho)
 for(i in 2:T){
-  f[i,1] = b[i] * exp(-lambda0*exp(-alpha*(i-1))) +
+  f[i,1] = exp(-lambda0*exp(-alpha*(i-1))) +
     (rho / (R[1] * lambda0*exp(-alpha*(i-1))+rho) ) * (1-exp(-lambda0*exp(-alpha*(i-1))))
   for(j in 2:A){
     f[i,j] = f[i-1,j-1] * exp(-lambda0*exp(-alpha*(i-1))) +
@@ -60,3 +59,4 @@ for(i in 1:NT_obs){
 ## add to stan data
 test_data$N <- N
 test_data$K <- K
+test_data$T <- T
