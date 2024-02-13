@@ -27,15 +27,29 @@ test_data <- list(ObsT = c(5,10,15,20), #times of observations
 
 
 ## means
-f <- matrix(nrow=T,ncol=A)
-for(i in 1:A)
-  f[1,i] = (1-exp(-(R[i] * lambda0 + rho) * (i-0.5))) * rho / (R[i] * lambda0 + rho)
-for(i in 2:T){
-  f[i,1] = exp(-lambda0*exp(-alpha*(i-1))) +
-    (rho / (R[1] * lambda0*exp(-alpha*(i-1))+rho) ) * (1-exp(-lambda0*exp(-alpha*(i-1))))
-  for(j in 2:A){
-    f[i,j] = f[i-1,j-1] * exp(-lambda0*exp(-alpha*(i-1))) +
-      (rho / (R[j] * lambda0*exp(-alpha*(i-1))+rho) ) * (1-exp(-lambda0*exp(-alpha*(i-1))))
+## i,j = t,a
+h <- f <- matrix(nrow=T,ncol=A)
+
+## create h
+for(j in 1:A){
+  for(i in 1:T){
+    h[i,j] <- R[j] * lambda0 * exp(-alpha*(i-1)) + rho
+  }
+}
+
+## f(t,0)=1
+for(i in 1:T){
+  f[i,1] = 1.0
+}
+## a>0
+for(j in 2:A){
+  ## t=0 eqm
+  DH <- h[1,j]
+  f[1,j] = f[1,j-1] * exp(-DH) + rho * (1-exp(-DH))/DH
+  ## t>0
+  for(i in 2:T){
+    DH <- h[i,j]
+    f[i,j] = f[i-1,j-1] * exp(-DH) + rho * (1-exp(-DH))/DH
   }
 }
 

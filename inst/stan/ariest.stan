@@ -21,20 +21,27 @@ parameters{
 }
 transformed parameters{
   real f[T,A] = rep_array(0.0,T,A);//fraction uninfected by age
+  real h[T,A] = rep_array(0.0,T,A);//h in the PDEs
   real fs[NT_obs,NAge_obs] = rep_array(0.0,NT_obs,NAge_obs);//aggregate version
   //dynamics
-  for(i in 1:A) {
-    f[1,i] = (1-exp(-(R[i] * lambda0 + rho) * (i-0.5))) * rho /
-      (R[i] * lambda0 + rho); //initial state
+  //initialize h
+  for(i in 1:T) {
+    for(j in 1:A){
+      h[i,j] = R[j] * lambda0 * exp(-alpha*(i-1)) + rho;
+    }
   }
-  for(i in 2:T){
-    f[i,1] = exp(-lambda0*exp( -alpha*(i-1) )) +
-      (rho / (R[1] * lambda0*exp( -alpha*(i-1) )+rho)) *
-      (1-exp(-lambda0*exp( -alpha*(i-1) )));
-    for(j in 2:A){
-      f[i,j] = f[i-1,j-1] * exp(-lambda0*exp( -alpha*(i-1) )) +
-        (rho / (R[j] * lambda0*exp( -alpha*(i-1) )+rho) ) *
-        (1-exp(-lambda0*exp( -alpha*(i-1) )));
+  //populate f
+  //f(t,0) = 1
+  for(i in 1:T){
+    f[i,1] = 1.0;
+  }
+  //a>0
+  for(j in 2:A){
+    //t=0, eqm
+    f[1,j] = f[1,j-1] * exp(-h[1,j]) + rho * (1-exp(-h[1,j]))/h[1,j];
+    //t>0
+    for(i in 2:T){
+      f[i,j] = f[i-1,j-1] * exp(-h[i,j]) + rho * (1-exp(-h[i,j]))/h[i,j];
     }
   }
   //print(to_array_1d(f));
